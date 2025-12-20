@@ -8,6 +8,9 @@
 !src/
 
 # Allow only this path inside src
+!src/**
 !src/com/
 !src/com/leetcode/
 !src/com/leetcode/**
+!src/producer/consumer/in/plain/java/**
+!src/threads/**
