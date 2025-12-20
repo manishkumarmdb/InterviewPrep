@@ -5,12 +5,21 @@
 !*/
 
 # Allow src directory
-!src/
-
-# Allow only this path inside src
 !src/**
-!src/com/
-!src/com/leetcode/
-!src/com/leetcode/**
-!src/producer/consumer/in/plain/java/**
-!src/threads/**
+
+# Allow problemsolving module
+!problemsolving/
+!problemsolving/gradle/**
+!problemsolving/src/**
+!problemsolving/*.gradle
+!problemsolving/gradlew*
+
+# Allow springboot module
+!springboot/
+!springboot/gradle/**
+!springboot/src/**
+!springboot/*.gradle
+!springboot/gradlew*
+
+# Allow .gitignore file
+!.gitignore
