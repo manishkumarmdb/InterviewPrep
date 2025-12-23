@@ -4,6 +4,10 @@
 # Allow directories so Git can traverse paths
 !*/
 
+# IntelliJ IDEA
+.idea/
+*.iml
+
 # Allow src directory
 !src/**
 
