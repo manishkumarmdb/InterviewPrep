@@ -1,0 +1,11 @@
+goat,alone,wolf,goat,cabbage,alone,goat
+wolf,goat,cabbage
+goat,cabbage,goat,wolf,alone
+goat,alone,cabbage,goat,wolf,alone,goat
+cabbage,wolf,goat
+alone,cabbage,goat,wolf
+wolf,alone,cabbage,alone,goat
+goat,wolf,alone,cabbage
+goat,alone,wolf,goat,cabbage,alone,goat
+goat,alone,cabbage,goat,wolf,alone,goat
+cabbage,goat,wolf
