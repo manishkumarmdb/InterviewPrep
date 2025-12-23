@@ -18,7 +18,7 @@ public class JavaAPIFetchAndFormat {
   }
 
   // Function 1: fetchPosts()
-  public static List<Post> fetchPosts() throws Exception {
+  private static List<Post> fetchPosts() throws Exception {
     String urlString = "https://coderbyte.com/api/challenges/json/all-posts";
     URL url = new URL(urlString);
     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -41,7 +41,7 @@ public class JavaAPIFetchAndFormat {
   }
 
   // Function 2: formatPosts()
-  public static List<Map<String, Integer>> formatPosts(List<Post> posts) {
+  private static List<Map<String, Integer>> formatPosts(List<Post> posts) {
 
     return posts.stream()
         .collect(Collectors.groupingBy(
