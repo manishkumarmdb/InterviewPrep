@@ -18,7 +18,7 @@ public class MinWindowSubstring {
     int have = 0, need = required.size();
     int left = 0, right = 0;
     int minLen = Integer.MAX_VALUE;
-    int startIdx = 0;
+    int startIndex;
 
     String result = ""; // Result variable
 
@@ -34,8 +34,8 @@ public class MinWindowSubstring {
         // Update minimum window
         if (right - left + 1 < minLen) {
           minLen = right - left + 1;
-          startIdx = left;
-          result = N.substring(startIdx, startIdx + minLen);
+          startIndex = left;
+          result = N.substring(startIndex, startIndex + minLen);
         }
 
         char leftChar = N.charAt(left);
