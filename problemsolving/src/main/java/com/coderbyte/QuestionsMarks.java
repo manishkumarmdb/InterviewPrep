@@ -36,6 +36,25 @@ public class QuestionsMarks {
     return foundValidPair ? "true" : "false";
   }
 
+  private static String questionsMarksIIWay(String str) {
+    // code goes here
+    str = str.replaceAll("[a-z]", "");
+    Pattern rightPattern = Pattern.compile("([0-9])([?])([?])([?])([0-9])");
+    Pattern falsePattern1 = Pattern.compile("([0-9])([?])([?])([0-9])");
+    Pattern falsePattern2 = Pattern.compile("([0-9])([?])([0-9])");
+    Matcher rightMatcher = rightPattern.matcher(str);
+    Matcher falseMatcher1 = falsePattern1.matcher(str);
+    Matcher falseMatcher2 = falsePattern2.matcher(str);
+
+    if (falseMatcher1.find() || falseMatcher2.find()){
+      return "false";
+    }
+    if (rightMatcher.find()){
+      return "true";
+    }
+    return "false";
+  }
+
   public static void main(String[] args) {
     System.out.println(questionsMarks("arrb6???4xxbl5???eee5")); // true
     System.out.println(questionsMarks("aa6???5")); // false
