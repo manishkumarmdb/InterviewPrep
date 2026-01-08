@@ -18,17 +18,16 @@ public class LeetCode0206ReverseLinkedList {
             this.next = next;
         }
     }
-    public ListNode reverseList(ListNode head) {
+    private ListNode reverseList(ListNode head) {
 
-        ListNode prev = null;
-        ListNode temp = head;
-        while (temp != null) {
-            ListNode curr = temp.next;
-            temp.next = prev;
-            prev = temp;
-            temp = curr;
+        ListNode previousNode = null;
+        while (head != null) {
+            ListNode currentNode = head.next;
+            head.next = previousNode;
+            previousNode = head;
+            head = currentNode;
         }
-        return prev;
+        return previousNode;
     }
 }
 
