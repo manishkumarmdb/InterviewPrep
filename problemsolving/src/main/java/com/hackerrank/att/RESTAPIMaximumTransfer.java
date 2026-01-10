@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
@@ -18,6 +19,7 @@ public class RESTAPIMaximumTransfer {
   private static final String BASE_URL = "https://jsonmock.hackerrank.com/api/transactions";
 
   private static List<String> maximumTransfer(String name, String city) {
+    List<String> result = new ArrayList<>();
     URI uri = URI.create(BASE_URL);
     try {
       HttpURLConnection connection = (HttpURLConnection) uri.toURL().openConnection();
@@ -55,14 +57,40 @@ public class RESTAPIMaximumTransfer {
           })
           .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
       System.out.println("\nfilteredJsonArray:\n" + filteredJsonArray);
+      // Max credit
+      Optional<Double> maxCredit = StreamSupport.stream(filteredJsonArray.spliterator(), false)
+          .map(JsonElement::getAsJsonObject)
+          .filter(obj -> "credit".equalsIgnoreCase(obj.get("txnType").getAsString()))
+          .map(obj -> parseAmount(obj.get("amount").getAsString()))
+          .max(Double::compare);
+
+      // Max debit
+      Optional<Double> maxDebit = StreamSupport.stream(filteredJsonArray.spliterator(), false)
+          .map(JsonElement::getAsJsonObject)
+          .filter(obj -> "debit".equalsIgnoreCase(obj.get("txnType").getAsString()))
+          .map(obj -> parseAmount(obj.get("amount").getAsString()))
+          .max(Double::compare);
+
+      result.add(formatCurrency(maxCredit.orElse(0.0)));
+      result.add(formatCurrency(maxDebit.orElse(0.0)));
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
 
-    return null;
+    return result;
+  }
+
+  // Utility to parse "$1,670.57" → 1670.57
+  private static double parseAmount(String amount) {
+    return Double.parseDouble(amount.replace("$", "").replace(",", "").trim());
+  }
+
+  private static String formatCurrency(double value) {
+    return String.format("$%,.2f", value);
   }
 
   public static void main(String[] args) {
-    maximumTransfer("John Oliver", "Ripley");
+    List<String> result = maximumTransfer("John Oliver", "Ripley");
+    result.stream().forEach(System.out::println);
   }
 }
