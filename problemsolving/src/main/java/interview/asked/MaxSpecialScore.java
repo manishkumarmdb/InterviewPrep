@@ -16,7 +16,7 @@ public class MaxSpecialScore {
   private static int maxSpecialScore(String str, int length) {
     /*
     * At least 2 characters are required to form two non-empty substrings
-    * If the string length is less than 2 → immediately invalid
+    * If the string length is less than 2 -> immediately invalid
     * */
     if (length < 2) return -1;
 
