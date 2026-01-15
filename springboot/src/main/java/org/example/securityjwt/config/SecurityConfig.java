@@ -17,7 +17,7 @@ public class SecurityConfig {
     httpSecurity
         .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/public/**").permitAll()
+            .requestMatchers("/api/public").permitAll()
             .requestMatchers("/admin/**").hasRole("ADMIN")
             .anyRequest()
             .authenticated()
@@ -34,7 +34,7 @@ public class SecurityConfig {
   JwtAuthenticationConverter jwtAuthenticationConverter() {
     JwtGrantedAuthoritiesConverter authoritiesConverter = new JwtGrantedAuthoritiesConverter();
     authoritiesConverter.setAuthorityPrefix("ROLE_");
-    authoritiesConverter.setAuthoritiesClaimName("roles");
+    authoritiesConverter.setAuthoritiesClaimName("realm_access.roles");
 
     JwtAuthenticationConverter authenticationConverter = new JwtAuthenticationConverter();
     authenticationConverter.setJwtGrantedAuthoritiesConverter(authoritiesConverter);
