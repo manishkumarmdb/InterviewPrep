@@ -17,20 +17,26 @@ public class ApiController {
     this.userService = userService;
   }
 
-  @GetMapping("/public")
+  @GetMapping("/public/hello")
   public String publicApi() {
     return "Public API – No Authentication Required";
   }
 
-  @PreAuthorize("hasRole('USER')")
-  @GetMapping("/user")
+  @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+  @GetMapping("/user/details")
   public UserDto getUserDto() {
     return userService.getUser();
   }
 
-  @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
-  @GetMapping("/manage")
+  @PreAuthorize("hasRole('ADMIN')")
+  @GetMapping("/admin/manage")
   public String manage() {
     return "Admin/Manager Access Granted";
+  }
+
+  @PreAuthorize("hasRole('ADMIN')")
+  @GetMapping("/admin/dashboard")
+  public String dashboard() {
+    return "Admin Dashboard Access Granted";
   }
 }
