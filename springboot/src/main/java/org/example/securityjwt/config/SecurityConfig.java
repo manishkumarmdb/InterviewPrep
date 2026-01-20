@@ -18,6 +18,7 @@ public class SecurityConfig {
         // Authorization rules
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/api/public/**").permitAll()
+            .requestMatchers("/api/auth/**").permitAll()  // Allow login/register without auth
             .requestMatchers("/api/admin/**").hasRole("ADMIN")
             .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
             .anyRequest()
