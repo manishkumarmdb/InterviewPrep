@@ -4,26 +4,41 @@ import java.util.Arrays;
 
 public class LeetCode0189RotateArray {
 
-    public void rotate(int[] nums, int k) {
-        k %= nums.length;
-        reverse(nums, 0, nums.length - 1);
-        reverse(nums, 0, k - 1);
-        reverse(nums, k, nums.length - 1);
-    }
+  // Reverse-based array rotation approach
+  // Time: O(n), Space: O(1)
+  // Idea: Reverse three segments to achieve rotation without extra space
+  // Example: [1,2,3,4,5,6,7] rotated by 3 → [5,6,7,1,2,3,4]
+  private static void rotate(int[] nums, int k) {
+    // Handle k greater than array length
+    k %= nums.length;
 
-    public void reverse(int[] nums, int start, int end) {
-        for (; start < end;) {
-            int temp = nums[start];
-            nums[start++] = nums[end];
-            nums[end--] = temp;
-        }
-    }
+    // Step 1: Reverse entire array
+    // [1,2,3,4,5,6,7] → [7,6,5,4,3,2,1]
+    reverse(nums, 0, nums.length - 1);
 
-    public static void main(String[] args) {
-        int[] nums = new int[]{1,2,3,4,5,6,7};
-        int k = 3;
-        LeetCode0189RotateArray obj = new LeetCode0189RotateArray();
-        obj.rotate(nums, k);
-        System.out.println(Arrays.toString(nums));
+    // Step 2: Reverse first k elements
+    // [7,6,5,4,3,2,1] → [5,6,7,4,3,2,1]
+    reverse(nums, 0, k - 1);
+
+    // Step 3: Reverse remaining elements
+    // [5,6,7,4,3,2,1] → [5,6,7,1,2,3,4]
+    reverse(nums, k, nums.length - 1);
+  }
+
+  // Helper method to reverse array elements between start and end indices
+  private static void reverse(int[] nums, int start, int end) {
+    for (; start < end; ) {
+      // Swap elements at start and end positions
+      int temp = nums[start];
+      nums[start++] = nums[end];
+      nums[end--] = temp;
     }
+  }
+
+  public static void main(String[] args) {
+    int[] nums = new int[]{1, 2, 3, 4, 5, 6, 7};
+    int k = 3;
+    rotate(nums, k);
+    System.out.println(Arrays.toString(nums));
+  }
 }
