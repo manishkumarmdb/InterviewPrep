@@ -20,18 +20,19 @@ public class CalculateTheDiameterOfABinaryTree {
   }
 
   private int diameterOfBinaryTree(TreeNode root) {
-    calculateHeight(root);
-    return diameter;
+    int[] diameter = new int[1];
+    calculateHeight(root, diameter);
+    return diameter[0];
   }
 
-  private int calculateHeight(TreeNode node) {
+  private int calculateHeight(TreeNode node, int[] diameter) {
     if (node == null) return 0;
     // Recursively calculate the height of left and right subtree
-    int leftHeight = calculateHeight(node.left);
-    int rightHeight = calculateHeight(node.right);
+    int leftHeight = calculateHeight(node.left, diameter);
+    int rightHeight = calculateHeight(node.right, diameter);
 
     // Calculate the diameter at the current node and update the global variable
-    diameter = Math.max(diameter, (leftHeight + rightHeight));
+    diameter[0] = Math.max(diameter[0], (leftHeight + rightHeight));
 
     return 1 + Math.max(leftHeight, rightHeight);
   }
