@@ -16,6 +16,7 @@ public class SegregateEvenAndOddNodesInLinkedList {
     // Edge case: If list is empty or has only one node
     if (head == null || head.next == null) return head;
 
+    boolean isHeadEven = head.data % 2 == 0 ? true : false;
     // Create pointers for the heads and tails of even and odd lists
     Node evenHead = null, evenTail = null;
     Node oddHead = null, oddTail = null;
@@ -59,13 +60,18 @@ public class SegregateEvenAndOddNodesInLinkedList {
     // If no odd nodes found, return even list
     if (oddHead == null) return evenHead;
 
-    // Combine even and odd lists
-    evenTail.next = oddHead;
+    // merge evenHead and oddHead
+    if (isHeadEven) {
+      evenTail.next = oddHead;
+      oddTail.next = null;
 
-    // Set end of list to null
-    oddTail.next = null;
+      return evenHead;
+    } else {
+      oddTail.next = evenHead;
+      evenTail.next = null;
 
-    return evenHead;
+      return oddHead;
+    }
   }
 
   public static void main(String[] args) {
