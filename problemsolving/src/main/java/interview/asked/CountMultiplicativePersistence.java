@@ -2,7 +2,7 @@ package interview.asked;
 
 public class CountMultiplicativePersistence {
 
-  private static int persistence(long num) {
+  private static int countMultiplicativePersistence(long num) {
     if (num < 10) {
       return 0;
     }
@@ -27,8 +27,16 @@ public class CountMultiplicativePersistence {
     return product;
   }
 
+  private static long digitsProductRecursive(long num) {
+    if (num == 0) {
+      return 1;
+    }
+
+    return (num % 10) * digitsProductRecursive(num / 10);
+  }
+
   public static void main(String[] args) {
     int input = 39;
-    System.out.println(persistence(input));
+    System.out.println(countMultiplicativePersistence(input));
   }
 }
