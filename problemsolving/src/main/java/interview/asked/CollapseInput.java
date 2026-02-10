@@ -1,7 +1,7 @@
 package interview.asked;
 
 public class CollapseInput {
-  public static String collapseInput(String input) {
+  private static String collapseInput(String input) {
     if (input.isEmpty())
       return "";
     String result = "";

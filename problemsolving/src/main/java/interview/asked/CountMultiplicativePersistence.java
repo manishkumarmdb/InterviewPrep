@@ -2,7 +2,7 @@ package interview.asked;
 
 public class CountMultiplicativePersistence {
 
-  public static int persistence(long num) {
+  private static int persistence(long num) {
     if (num < 10) {
       return 0;
     }
